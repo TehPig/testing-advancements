@@ -1,0 +1,10 @@
+name: Testing-Advancements
+version: '1.0-SNAPSHOT'
+main: org.tehcraftsmp.testingAdvancements.TestingAdvancements
+api-version: '1.21'
+load: POSTWORLD
+
+permissions:
+  testingadvancements.admin:
+    description: "Allows resetting of advancements"
+    default: op
