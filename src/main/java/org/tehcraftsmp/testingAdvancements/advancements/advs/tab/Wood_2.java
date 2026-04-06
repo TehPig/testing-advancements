@@ -5,6 +5,7 @@ import com.fren_gor.ultimateAdvancementAPI.advancement.display.AdvancementFrameT
 import com.fren_gor.ultimateAdvancementAPI.util.AdvancementKey;
 import com.fren_gor.ultimateAdvancementAPI.util.CoordAdapter;
 import com.fren_gor.ultimateAdvancementAPI.visibilities.ParentGrantedVisibility;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,7 @@ public class Wood_2 extends EasyAdvancement implements ParentGrantedVisibility, 
 
   @EventHandler
   public void onBlockBreak(BlockBreakEvent event) {
-    if (Tag.LOGS.isTagged(event.getBlock().getType())) {
+    if (Tag.LOGS.isTagged(event.getBlock().getType()) && event.getPlayer().getGameMode() == GameMode.SURVIVAL) {
       this.incrementProgression(event.getPlayer(), 1);
     }
   }

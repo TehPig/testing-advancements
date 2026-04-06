@@ -13,6 +13,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.tehcraftsmp.testingAdvancements.advancements.advs.AdvancementTabNamespaces;
 import org.tehcraftsmp.testingAdvancements.advancements.advs.EasyAdvancement;
+import org.tehcraftsmp.testingAdvancements.utils.Logger;
 
 public class Inventory extends EasyAdvancement implements Listener {
 
@@ -24,6 +25,7 @@ public class Inventory extends EasyAdvancement implements Listener {
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
+        Logger.info("Player " + event.getPlayer().getName() + " has opened inventory.");
         if (event.getPlayer() instanceof Player plr) this.grant(plr);
     }
 

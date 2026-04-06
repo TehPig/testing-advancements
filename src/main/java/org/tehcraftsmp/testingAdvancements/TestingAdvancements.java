@@ -23,7 +23,6 @@ public final class TestingAdvancements extends JavaPlugin {
 
     private AdvancementMain main;
     private UltimateAdvancementAPI api;
-    private AdvancementTab tab;
     private static final List<Advancement> advancements = new ArrayList<>();
 
     public static List<Advancement> getAdvancements() {
@@ -45,9 +44,7 @@ public final class TestingAdvancements extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PlayerJoin(api), this);
 
-        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            event.registrar().register("testadv", "Main command for Testing Advancements", List.of("tadv"), new AdvancementCommand(api));
-        });
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> event.registrar().register("testadv", "Main command for Testing Advancements", List.of("tadv"), new AdvancementCommand(api)));
 
         Logger.info("TestingAdvancements has been enabled successfully.");
     }
@@ -64,7 +61,7 @@ public final class TestingAdvancements extends JavaPlugin {
     private void setupAdvancements() {
         CoordAdapter coords = createCoordAdapter();
 
-        tab = api.createAdvancementTab(AdvancementTabNamespaces.tab_NAMESPACE, "textures/block/mangrove_log.png");
+        AdvancementTab tab = api.createAdvancementTab(AdvancementTabNamespaces.tab_NAMESPACE, "textures/block/mangrove_log.png");
 
         Root beginning = new Root(tab, coords, "textures/block/mangrove_log.png");
 
@@ -87,7 +84,7 @@ public final class TestingAdvancements extends JavaPlugin {
         // --- Communication Branch ---
         Chat chat = new Chat(beginning, coords);
         Chat_2 chat_2 = new Chat_2(chat, coords);
-        Chat_3 chat_3 = new Chat_3(chat2, coords);
+        Chat_3 chat_3 = new Chat_3(chat_2, coords);
         ChattyKathy chatty = new ChattyKathy(chat, coords);
 
         getServer().getPluginManager().registerEvents(chat, this);
@@ -117,9 +114,10 @@ public final class TestingAdvancements extends JavaPlugin {
 
         tab.registerAdvancements(
                 beginning, wood_1, wood_2, wood_3, stone_1, stone_2,
-                chat, chat2, chat_3, chatty, sword_1, sword_2, notEvenClose,
+                chat, chat_2, chat_3, chatty, sword_1, sword_2, notEvenClose,
                 cactusHugger, inventory, craft
         );
+        tab.automaticallyGrantRootAdvancement();
 
         // Keep track of all advancements for manual reset
         advancements.clear();

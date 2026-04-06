@@ -8,7 +8,6 @@ import com.fren_gor.ultimateAdvancementAPI.visibilities.ParentGrantedVisibility;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.tehcraftsmp.testingAdvancements.advancements.advs.AdvancementTabNamespaces;
@@ -25,8 +24,6 @@ public class Chat extends EasyAdvancement implements ParentGrantedVisibility, Li
   @EventHandler
   public void onChat(AsyncChatEvent event) {
       String content = PlainTextComponentSerializer.plainText().serialize(event.message());
-      if (content.toLowerCase().contains("hello")) {
-          this.grant(event.getPlayer());
-      }
+      if (content.toLowerCase().contains("hello")) this.grant(event.getPlayer());
   }
 }

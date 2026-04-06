@@ -26,9 +26,7 @@ public class NotEvenClose extends EasyAdvancement implements ParentGrantedVisibi
     public void onMobKill(EntityDeathEvent event) {
         if (event.getEntity() instanceof Monster && event.getEntity().getKiller() != null) {
             Player killer = event.getEntity().getKiller();
-            if (killer.getHealth() <= 1.0) { // 0.5 hearts
-                this.grant(killer);
-            }
+            if (killer.getHealth() <= 1.0) this.grant(killer);
         }
     }
 }

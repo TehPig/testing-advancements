@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.tehcraftsmp.testingAdvancements.advancements.advs.AdvancementTabNamespaces;
 import org.tehcraftsmp.testingAdvancements.advancements.advs.EasyAdvancement;
 
@@ -26,5 +27,10 @@ public class Craft extends EasyAdvancement implements ParentGrantedVisibility, L
     if (event.getWhoClicked() instanceof Player plr) {
       if (event.getRecipe().getResult().getType() == Material.CRAFTING_TABLE) this.grant(plr);
     }
+  }
+
+  @Override
+  public void giveReward(Player player) {
+    player.give(ItemStack.of(Material.CRAFTING_TABLE, 1));
   }
 }

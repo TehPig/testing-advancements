@@ -24,9 +24,7 @@ public class CactusHugger extends EasyAdvancement implements ParentGrantedVisibi
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player plr) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
-                this.incrementProgression(plr, 1);
-            }
+            if (event.getCause() == EntityDamageEvent.DamageCause.CONTACT) this.incrementProgression(plr, 1);
         }
     }
 }
