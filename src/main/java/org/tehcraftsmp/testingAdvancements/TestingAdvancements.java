@@ -29,6 +29,8 @@ public final class TestingAdvancements extends JavaPlugin {
         return advancements;
     }
 
+    private boolean debugMode = false;
+
     @Override
     public void onLoad() {
         main = new AdvancementMain(this);
@@ -46,14 +48,16 @@ public final class TestingAdvancements extends JavaPlugin {
 
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> event.registrar().register("testadv", "Main command for Testing Advancements", List.of("tadv"), new AdvancementCommand(api)));
 
-        Logger.info("TestingAdvancements has been enabled successfully.");
+        Logger.info("Plugin has been enabled successfully.");
     }
 
     @Override
     public void onDisable() {
         if (main != null) main.disable();
-        Logger.info("TestingAdvancements has been disabled.");
+        Logger.info("Plugin has been disabled.");
     }
+
+    public boolean isDebugMode() {return this.debugMode;    }
 
     /**
      * Builds the advancement hierarchy and defines visual relationships.
@@ -112,11 +116,7 @@ public final class TestingAdvancements extends JavaPlugin {
         getServer().getPluginManager().registerEvents(inventory, this);
         getServer().getPluginManager().registerEvents(craft, this);
 
-        tab.registerAdvancements(
-                beginning, wood_1, wood_2, wood_3, stone_1, stone_2,
-                chat, chat_2, chat_3, chatty, sword_1, sword_2, notEvenClose,
-                cactusHugger, inventory, craft
-        );
+        tab.registerAdvancements(beginning, wood_1, wood_2, wood_3, stone_1, stone_2, chat, chat_2, chat_3, chatty, sword_1, sword_2, notEvenClose, cactusHugger, inventory, craft);
         tab.automaticallyGrantRootAdvancement();
 
         // Keep track of all advancements for manual reset
@@ -140,23 +140,6 @@ public final class TestingAdvancements extends JavaPlugin {
     }
 
     private CoordAdapter createCoordAdapter() {
-        return CoordAdapter.builder()
-                .add(Root.KEY, 0f, 0f)
-                .add(Inventory.KEY, -2f, 0f)
-                .add(Craft.KEY, -3f, 0f)
-                .add(Chat.KEY, 1f, -2f)
-                .add(Chat_2.KEY, 2f, -2f)
-                .add(Chat_3.KEY, 3f, -2f)
-                .add(ChattyKathy.KEY, 2f, -3f)
-                .add(Wood_1.KEY, 2f, 0f)
-                .add(Wood_2.KEY, 3f, 0f)
-                .add(Wood_3.KEY, 4f, 0f)
-                .add(Stone_1.KEY, 3f, 1f)
-                .add(Stone_2.KEY, 4f, 1f)
-                .add(Sword_1.KEY, 2f, 3f)
-                .add(Sword_2.KEY, 3f, 3f)
-                .add(NotEvenClose.KEY, 3f, 4f)
-                .add(CactusHugger.KEY, 0f, 2f)
-                .build();
+        return CoordAdapter.builder().add(Root.KEY, 0f, 0f).add(Inventory.KEY, -2f, 0f).add(Craft.KEY, -3f, 0f).add(Chat.KEY, 1f, -2f).add(Chat_2.KEY, 2f, -2f).add(Chat_3.KEY, 3f, -2f).add(ChattyKathy.KEY, 2f, -3f).add(Wood_1.KEY, 2f, 0f).add(Wood_2.KEY, 3f, 0f).add(Wood_3.KEY, 4f, 0f).add(Stone_1.KEY, 3f, 1f).add(Stone_2.KEY, 4f, 1f).add(Sword_1.KEY, 2f, 3f).add(Sword_2.KEY, 3f, 3f).add(NotEvenClose.KEY, 3f, 4f).add(CactusHugger.KEY, 0f, 2f).build();
     }
 }

@@ -8,9 +8,10 @@ import org.tehcraftsmp.testingAdvancements.TestingAdvancements;
 
 public class Logger {
 
-    private static final Component BRAND = MiniMessage.miniMessage().deserialize("<red>Testing</red>");
+    private static final Component BRAND = MiniMessage.miniMessage().deserialize("<red>TestingAdvancements</red>");
+    private static boolean debugMode = false;
 
-    public static void init(TestingAdvancements plugin) {}
+    public static void init(TestingAdvancements plugin) {debugMode = plugin.isDebugMode();}
 
     public static void info(String message) {
         Bukkit.getConsoleSender().sendMessage(BRAND.append(Component.text(" - ", NamedTextColor.GRAY))
